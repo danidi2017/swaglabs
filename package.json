@@ -1,0 +1,15 @@
+{
+  "name": "tallercypress",
+  "version": "1.0.0",
+  "description": "proyecto cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "cy:open": "cypress open"
+  },
+  "author": "danieldiaz",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.13.2"
+  }
+}
