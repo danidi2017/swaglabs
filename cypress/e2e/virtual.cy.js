@@ -124,7 +124,7 @@ describe('Proceso de compra', () => {
     cy.get('[data-test="inventory-item"]').should('have.length', 1)
   })
 
-  it.only('Validar autenticidad de los Productos añadidos al Carrito', () => {
+  it('Validar autenticidad de los Productos añadidos al Carrito', () => {
     cy.get('[data-test="username"]').type(Cypress.env('default_user'));
     cy.get('[data-test="password"]').type(Cypress.env('default_password'));
     cy.get('[data-test="login-button"]').click();
@@ -167,5 +167,30 @@ describe('Proceso de compra', () => {
     });
   });
 
+  it('Validar regreso a Productos para añadir un nuevo al Carrito', () => {
+    cy.get('[data-test="username"]').type(Cypress.env('default_user'))
+    cy.get('[data-test="password"]').type(Cypress.env('default_password'))
+    cy.get('[data-test="login-button"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
+    cy.get('[data-test="remove-sauce-labs-backpack"]').click()
+    cy.get('[data-test="continue-shopping"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-bike-light"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
+    cy.get('[data-test="inventory-item"]').should('have.length', 2)
+  })
+
+  it.only('Validar ingreso al Checkout CON Productos', () => {
+    cy.get('[data-test="username"]').type(Cypress.env('default_user'))
+    cy.get('[data-test="password"]').type(Cypress.env('default_password'))
+    cy.get('[data-test="login-button"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-bike-light"]').click()
+    cy.get('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
+    cy.get('[data-test="checkout"]').click()
+    cy.get('[data-test="title"]').contains("Checkout: Your Information")
+  })
 
 })
