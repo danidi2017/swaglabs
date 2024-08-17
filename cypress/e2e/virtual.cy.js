@@ -1,4 +1,9 @@
 describe('Proceso de compra', () => {
+  before(() => {
+    // Limpiar cookies y local storage antes de toda la suite de pruebas
+    cy.clearCookies();
+    cy.clearLocalStorage();
+  });
   it('Validar pagina de inicio', () => {
     cy.visit(Cypress.env('base_url'))
     cy.get(".login_logo").should("be.visible")
@@ -26,6 +31,16 @@ Object.entries(invalid_users).forEach(([username, password]) => {
     cy.get('[data-test="error"]').contains("Epic sadface: Username and password do not match any user in this service")
   })
 })
+
+it('Validar password Requerido', () => {
+  cy.visit(Cypress.env('base_url'))
+  cy.get('[data-test="username"]').type(Cypress.env('user_empty'))
+  cy.get('[data-test="password"]').clear()
+  cy.get('[data-test="login-button"]').click()
+  cy.get('[data-test="error"]').contains("Epic sadface: Password is required")
+})
+
+
 
 })
 
