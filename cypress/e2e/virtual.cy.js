@@ -1,19 +1,22 @@
 describe('Proceso de compra', () => {
   it('Validar pagina de inicio', () => {
-    cy.visit('https://www.saucedemo.com')
+    cy.visit(Cypress.env('base_url'))
     cy.get(".login_logo").should("be.visible")
-
   })
 
+const users = Cypress.env('users');
+
+Object.entries(users).forEach(([username, password]) => {
   it('Validar inicio de sesion', () => {
-    cy.visit('https://www.saucedemo.com')
-    cy.get('[data-test="username"]').type("standard_user")
-    cy.get('[data-test="password"]').type("secret_sauce")
+    cy.visit(Cypress.env('base_url'))
+    cy.get('[data-test="username"]').type(username)
+    cy.get('[data-test="password"]').type(password)
     cy.get('[data-test="login-button"]').click()
   })
+})
 
   it('Validar password invalido', () => {
-    cy.visit('https://www.saucedemo.com')
+    cy.visit(Cypress.env('base_url'))
     cy.get('[data-test="username"]').type("standard_user")
     cy.get('[data-test="password"]').type("12345")
     cy.get('[data-test="login-button"]').click()
