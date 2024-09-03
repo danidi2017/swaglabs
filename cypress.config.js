@@ -4,10 +4,12 @@ module.exports = defineConfig({
  // retries:1,
   //video:true,
   e2e: {
-    //baseUrl:"https://www.saucedemo.com",
+    baseUrl:"https://www.saucedemo.com",
     //"screenshoptfolder": "cypress/screenshop",
     //"screenshotOnRunFailure": true,
     setupNodeEvents(on, config) {
     },
   },
+
+  experimentalWebKitSupport:true,
 });
